@@ -1,0 +1,18 @@
+<aside class="col-md-3" >
+  <!--   SIDEBAR   -->
+  <ul class="list-group" > 
+    <a class="list-group-item {% if '/dashboard/view/' in request.path%} active {% endif %}" style = "color:black" href="{% url 'dashboard' %}"> <strong>Dashboard</strong> </a>
+    <a class="list-group-item {% if '/dashboard/edit/' in request.path%}active{% endif %}" style = "color:black" href="{% url 'edit_profile' %}"><strong>Edit Details</strong></a>			
+    <a class="list-group-item {% if '/dashboard/orders/' in request.path %}active{% endif %}" style = "color:black" href="{% url 'my_orders'%}"> <strong> My Orders</strong></a>
+    <a class="list-group-item {% if '/dashboard/change_password/' in request.path %}active{% endif %}" style = "color:black" href="{% url 'change_password' %}"> <strong>Change Password</strong></a>
+    <a class="list-group-item {% if '/dashboard/address/' in request.path%} active {% endif %}" style = "color:black" href="{% url 'addresscrud' %}" > <strong>Address</strong></a>
+
+  </ul>
+  <br>
+  <a class="btn btn-light btn-block" href="{% url 'logout' %}" style="background-color: #FF3368"> 
+    <i class="fa fa-power-off"></i> 
+    <span class="text">Log out</span> 
+  </a>
+  
+  <!--   SIDEBAR .//END   -->
+</aside>

@@ -1,0 +1,8 @@
+<h1>OTP Input</h1>
+<p>An OTP has been sent to {{ phone_number }}</p>
+<form method="POST" action="{% url 'otp_login' %}">
+  {% csrf_token %}
+  <input type="text" name="otp_code">
+  <input type="hidden" name="phone_number" value="{{ phone_number }}">
+  <button type="submit">Login</button>
+</form>

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!doctype html>
+<html lang="zxx">
+
+
+
+<body>
+   
+
+  {% comment %} <!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <h2>Shop Single</h2>
+              <p>Home <span>-</span> Shop Single</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb start--> {% endcomment %}
+  <!--================End Home Banner Area =================-->
+
+  <!--================Single Product Area =================-->
+  <div class="product_image_area section_padding">
+    <div class="container">
+      <div class="row s_product_inner justify-content-between">
+        <div class="col-lg-7 col-xl-7 pt-5">
+          <div class="product_slider_img">
+            <div id="vertical ">
+              <div data-thumb="img/product/single-product/product_1.png ">
+                <img src="{{single_product.images.url}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 col-xl-4 pt-5">
+          <div class="s_product_text">
+            
+            <h3>{{ single_product.product_name}}</h3>
+            <h2>₹{{single_product.price}}</h2>
+            <ul class="list">
+              <li>
+                <a class="active" href="#">
+                  <span>Category</span> : {{single_product.category}}</a>
+              </li>
+              <li>
+                <a href="#"> <span>Availibility</span> : {{single_product.stock}}</a>
+              </li>
+            </ul>
+            <p>
+             {{single_product.description}}
+            </p>
+            <div class="card_area d-flex justify-content-between align-items-center">
+              <div class="product_count">
+                <span class="inumber-decrement"> <i class="ti-minus"></i></span>
+                <input class="input-number" type="text" value="0" min="0" max="10">
+                <span class="number-increment"> <i class="ti-plus"></i></span>
+              </div>
+              {% if single_product.stock <= 0 %}
+                <a href="#" class="btn_3" style ="background-color:grey;">Out Of Stock </a>
+                {% else %}
+                  <a href="{% url 'add_cart' single_product.id %}" class="btn_3">+ add to cart</a>    
+              {% endif %}  
+              <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <!--================End Single Product Area =================-->
+
+ 
+
+  
+
+ 
+
+  <!-- jquery plugins here-->
+  <!-- jquery -->
+  <script src="js/jquery-1.12.1.min.js"></script>
+  <!-- popper js -->
+  <script src="js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- easing js -->
+  <script src="js/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+  <script src="js/lightslider.min.js"></script>
+  <!-- swiper js -->
+  <script src="js/masonry.pkgd.js"></script>
+  <!-- particles js -->
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.nice-select.min.js"></script>
+  <!-- slick js -->
+  <script src="js/slick.min.js"></script>
+  <script src="js/swiper.jquery.js"></script>
+  <script src="js/jquery.counterup.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/jquery.ajaxchimp.min.js"></script>
+  <script src="js/jquery.form.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="js/mail-script.js"></script>
+  <script src="js/stellar.js"></script>
+  <!-- custom js -->
+  <script src="js/theme.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+
+</html>
+{% endblock %} 

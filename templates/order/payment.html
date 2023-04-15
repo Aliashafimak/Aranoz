@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+{% include 'alerts.html' %}
+{% block content %}
+<!doctype html>
+<html lang="zxx">
+   
+      <!-- breadcrumb start-->
+    
+      <!--================Checkout Area =================-->
+      <section class="checkout_area padding_top">
+        <div class="container">
+          <div class="returning_customer">
+            
+            
+            
+          </div>
+          
+          <div class="billing_details">
+            <div class="row">
+              <div class="col-lg-8">
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="card" style="max-width: 400px; background-color: #ffffff; margin-right: 10px;">
+                      <div class="card-header">Billing Address</div>
+                      <div class="card-body">
+                        <p class="card-text">
+                          {{ order.fullName}}<br>
+                          {{ order.fullAddress}}
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    {% comment %} <div class="card" style="max-width: 400px; background-color: #ffffff; margin-left: 10px;">
+                      <div class="card-header">Shipping Address</div>
+                      <div class="card-body">
+                        <p class="card-text">
+                            {{ order.fullName}}<br>
+                            {{ order.fullAddress}}
+                        </p>
+                        <a href="{% url 'change_address'%}">change address</a>
+                      </div>
+                    </div> 
+                  </div> {% endcomment %}
+                  <div class="card" style="max-width: 400px; background-color: #ffffff; margin-left: 10px;">
+                  <div class="card-header">Shipping Address</div>
+                  <div class="card-body">
+                    <p class="card-text">
+                  <form>
+                    {% for address in user_addresses %}
+                    <div>
+                      <input type="radio" name="shipping_address" value="{{ address.id }}" id="address{{ address.id }}" />
+                      <label for="address{{ address.id }}">{{ address.full_address }}</label>
+                      
+                      <p>{{ address.city }}, {{ address.state }} {{ address.zipcode }}</p>
+                    </div>
+                    {% endfor %}
+                  </form>
+                </p>
+              </div>
+            </div> 
+          </div>
+                   
+                
+              </div>
+              <div class="col-lg-4">
+                <div class="order_box">
+                  <h2>Your Order</h2>
+                  
+                  <ul class="list list_2">
+                    <li>
+                      <a href="#">Subtotal
+                        <span>{{grand_total}}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Shipping
+                        <span>Flat rate: Free</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Total
+                        <span>{{grand_total}}</span>
+                      </a>
+                    </li>
+                  </ul>
+                
+                  <a href="{% url 'cod' %}" class="btn btn-dark m-1" style="width: 100%">Cash on Delivery</a>
+                  {% comment %} <a href="{% url 'razorpay_payment' %}" class="btn btn-dark m-1" style="width: 100%">RazorPay</a> {% endcomment %}
+                  <button id="rzp-button1" class="btn btn-dark m-1" style="width: 100%">Pay with Razorpay</button>
+                  
+                  
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    <!-- Razorpay's Javascript code. -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+     <script>
+    var options = {
+        "key": "rzp_test_t5tUcGp7uMQpAB", // Enter the Key ID generated from the Dashboard
+        "amount": "{{ payment.amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Aranoz",
+        "description": "Thank you. Visit Again!",
+        "image": "",
+        "order_id": "{{ order_id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url":"{% url 'payment_callback' %}",
+        //"handler": function (response){
+        //    alert(response.razorpay_payment_id);
+        //    alert(response.razorpay_order_id);
+        //    alert(response.razorpay_signature)
+        //},
+        "prefill": {
+            "name": "{{ order.fullName}}",
+            "email": "{{ order.email_address }}",
+            "contact": "{{order.phone_number}}"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+                                                                        {% comment %} rzp1.on('payment.failed', function (response){
+                                                                                alert(response.error.code);
+                                                                                alert(response.error.description);
+                                                                                alert(response.error.source);
+                                                                                alert(response.error.step);
+                                                                                alert(response.error.reason);
+                                                                                alert(response.error.metadata.order_id);
+                                                                                alert(response.error.metadata.payment_id);
+                                                                        }); {% endcomment %}
+   document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>   
+</html>
+{% endblock %}     

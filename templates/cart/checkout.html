@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+{% include 'alerts.html' %}
+{% block content %}
+<!doctype html>
+<html lang="zxx">
+
+
+
+<body>
+ 
+  
+  <!--================Home Banner Area =================-->
+  
+
+  <!--================Checkout Area =================-->
+  <section class="checkout_area padding_top">
+    <div class="container">
+    
+        
+        
+        
+      
+      <div class="cupon_area">
+        <div class="check_title">
+          <h2>
+            Have a coupon?
+          </h2>
+        </div>
+        <div id="coupon-form">
+          {% comment %} <form class="mb-5" method="POST" action="{% url 'apply_coupon' %}">
+            {% csrf_token %}
+            <div class="card-body ">
+              <div class="row justify-content-center">
+                <div class="input-group mb-3 col-md-8 d-flex justify-content-center">
+                  <input type="text" class="form-control p-4" placeholder="Coupon Code" id="{{ couponForm.code }}" name="code">
+                  <button type="submit" class="btn btn-primary">Apply Coupon</button>
+                </div>
+              </div>
+            </div>
+          </form> {% endcomment %}
+          <form class="mb-5" method="POST" action="{% url 'apply_coupon' %}">
+            {% csrf_token %}
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <div class="input-group mb-3 col-md-8 d-flex justify-content-center">
+                  <input type="text" class="form-control p-4" placeholder="Coupon Code" id="{{ couponForm.code }}" name="code">
+                  <button type="submit" class="btn btn-primary">Apply Coupon</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+      
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            {% comment %} <h3>Address Details</h3> {% endcomment %}
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title mb-4">Billing Address</h4>
+                <form action="{% url 'place_order' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">First Name</label>
+                      <input type="text" name="first_name" class="form-control" required>
+                    </div>
+                    <div class="col form-group">
+                      <label for="">Last Name</label>
+                      <input type="text" name="last_name" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">Email</label>
+                      <input type="email" name="email_address" class="form-control" required>
+                    </div>
+                    <div class="col form-group">
+                      <label for="">Phone Number</label>
+                      <input type="text" name="phone_number" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">Address Line 1</label>
+                      <input type="text" name="address1" class="form-control" required>
+                    </div>
+                    <div class="col form-group">
+                      <label for="">Address Line 2</label>
+                      <input type="text" name="address2" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label for="">City</label>
+                      <input type="text" name="city" class="form-control" required>
+                    </div>
+                    <div class="col form-group">
+                      <label for="">zipcode</label>
+                      <input type="text" name="zipcode" class="form-control" required>
+                    </div>
+                    
+                    </div>
+                    <div class="form-row">
+                      <div class="col form-group">
+                        <label for="">state</label>
+                        <input type="text" name="state" class="form-control" required>
+                      </div>
+                      <div class="col form-group">
+                        <label for=""> country </label>
+                        <input type="text" name="country" class="form-control" required>
+                      </div>
+                      
+                    </div>  
+                    <div class="form-row">
+                      <label for="">Order Note</label>
+                      <textarea name="order_note" rows="2" class="form-control"></textarea>
+                    </div> 
+            
+            
+              </div>
+            </div> 
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Your Order</h2>
+              <ul class="list">
+                <li>
+                  <a href="#">Product&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    
+                    <span>Total</span>
+                    quantity
+                  </a>
+                  
+                </li>
+                {% for cart_item in cart_items %}
+                <li>
+                  <a href="#">
+                    <img src="{{cart_item.product.images.url}}" alt="" width="50" height="50">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                   
+                    <span>₹{{cart_item.product.price}}</span>
+
+                    {{cart_item.quantity}}
+                  </a>
+                </li>
+                {% endfor %} 
+                
+              </ul>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Subtotal
+                    <span>₹{{total}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">coupon discount
+                    <span> ₹{{discount_amount}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">tax
+                    <span> ₹{{tax}}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Total
+                    <span>₹{{grand_total}}</span>
+                  </a>
+                </li>
+              </ul>
+              {% comment %} <div class="payment_item"> {% endcomment %}
+                {% comment %} <div class="radion_btn">
+                  <input type="radio" id="f-option5" name="selector" />
+                  <label for="f-option5">Check payments</label>
+                  <div class="check"></div>
+                </div> {% endcomment %}
+                {% comment %} <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p> {% endcomment %}
+              {% comment %} </div> {% endcomment %}
+              {% comment %} <div class="payment_item active">
+                <div class="radion_btn">
+                  <input type="radio" id="f-option6" name="selector" />
+                  <label for="f-option6">Paypal </label>
+                  <img src="img/product/single-product/card.jpg" alt="" />
+                  <div class="check"></div>
+                </div>
+                <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p>
+              </div> {% endcomment %}
+              {% comment %} <div class="creat_account">
+                <input type="checkbox" id="f-option4" name="selector" />
+                <label for="f-option4">I’ve read and accept the </label>
+                <a href="#">terms & conditions*</a>
+              </div> {% endcomment %}
+              
+              <button type="submit" name="submit" class="btn_3">Place Order</button>
+              </form>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+
+  <script>
+    // Clear the coupon code field on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById("{{ couponForm.code }}").value = "";
+    });
+  </script>
+
+</body>
+
+</html>
+{% endblock %} 
