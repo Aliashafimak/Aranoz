@@ -24,7 +24,7 @@ def home(request):
     context = {
         'random_products': random_products
     }
-    return render(request, 'app/index.html', context)
+    return render(request, 'index.html', context)
 
 
 
