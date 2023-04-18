@@ -146,7 +146,9 @@ if DEBUG==True:
 else:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ecommerce/static/')]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ecommerce/static/'),
+                        os.path.join(BASE_DIR, 'ecommerce/static/adminpanel')
+                        ]
 
 if DEBUG==True:
     MEDIA_URL = '/media/'
