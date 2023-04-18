@@ -155,9 +155,10 @@
     $(document).ready(function() {
       $('.input-number-increment, .input-number-decrement').click(function(e) {
         e.preventDefault();
-        var product_id = $(this).data('product-id');
-        var cart_item_id = $(this).data('cart-item-id');
-        var quantity = parseInt($('.cart-quantity[data-product-id="' + product_id + '"][data-cart-item-id="' + cart_item_id + '"]').val());
+        var inputElem = $(this).siblings('.cart-quantity');
+        var product_id = inputElem.data('product-id');
+        var cart_item_id = inputElem.data('cart-item-id');
+        var quantity = parseInt(inputElem.val());
     
         // Increment or decrement the quantity
         if ($(this).hasClass('input-number-increment')) {
@@ -178,11 +179,12 @@
           },
           success: function(data) {
             // Update the quantity on the page
-            $('.cart-quantity[data-product-id="' + product_id + '"][data-cart-item-id="' + cart_item_id + '"]').val(quantity);
+            inputElem.val(quantity);
           }
         });
       });
     });
+    
     </script>
 </body>
 {% endblock %}
