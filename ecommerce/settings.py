@@ -139,7 +139,9 @@ if DEBUG==True:
     STATIC_URL ='/static/'
     STATIC_ROOT =BASE_DIR/'static'
     STATICFILES_DIRS=[
-        'ecommerce/static/'
+        'ecommerce/static/',
+        # 'ecommerce/adminpanel/static'
+        'ecommerce/static/adminpanel/'
     ]     
 else:
     STATIC_URL = '/static/'

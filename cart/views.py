@@ -19,6 +19,20 @@ from pytz import timezone
 from datetime import datetime
 from django.utils import timezone
 from django.contrib import messages
+from django.http import JsonResponse
+from .models import CartItem
+
+def update_cart(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        cart_item_id = request.POST.get('cart_item_id')
+        quantity = request.POST.get('quantity')
+        cart_item = CartItem.objects.get(product__id=product_id, id=cart_item_id)
+        cart_item.quantity = quantity
+        cart_item.save()
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False})
 
 
 
