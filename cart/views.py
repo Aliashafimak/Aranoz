@@ -22,20 +22,36 @@ from django.contrib import messages
 from django.http import JsonResponse
 from .models import CartItem
 
-def update_cart(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        cart_item_id = request.POST.get('cart_item_id')
-        quantity = request.POST.get('quantity')
-        try:
-            cart_item = CartItem.objects.get(product__id=product_id, id=cart_item_id)
-        except CartItem.DoesNotExist:
-            return JsonResponse({'success': False, 'message': 'Cart item not found'})
-        cart_item.quantity = quantity
-        cart_item.save()
-        return JsonResponse({'success': True})
-    else:
-        return JsonResponse({'success': False})
+# 
+# def update_cart(request):
+#     # Get the product ID, cart item ID, quantity, and price/total IDs from the AJAX request
+#     product_id = request.POST.get('product_id')
+#     cart_item_id = request.POST.get('cart_item_id')
+#     quantity = request.POST.get('quantity')
+#     price_id = request.POST.get('price_id')
+#     total_id = request.POST.get('total_id')
+
+#     # Get the cart item and product
+#     cart_item = CartItem.objects.get(id=cart_item_id)
+#     product = Product.objects.get(id=product_id)
+
+#     # Update the cart item quantity and sub-total
+#     cart_item.quantity = quantity
+#     cart_item.sub_total = quantity * product.price
+#     cart_item.save()
+
+#     # Calculate the updated price and total for the cart item
+#     updated_price = cart_item.product.price
+#     updated_total = cart_item.sub_total
+
+#     # Calculate the updated subtotal, tax, and grand total for the cart
+#     cart_items = CartItem.objects.filter(cart_id=request.session['cart_id'])
+#     subtotal = sum([item.sub_total for item in cart_items])
+#     tax = subtotal * Decimal(0.1)
+#     grand_total = subtotal + tax
+
+    # Return the updated price and total for
+
 
 
 

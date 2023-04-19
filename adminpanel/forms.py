@@ -2,6 +2,9 @@ from django import forms
 from accounts.models import Account
 from category.models import Category
 from store.models import Product
+from cart.models import Coupon
+import datetime
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control mb-3 mt-1 validate',}), max_length=100)
@@ -45,4 +48,26 @@ class CategoryForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
          model = Product
-         fields = ['product_name', 'slug', 'description', 'price', 'stock', 'images','is_available', 'category']            
+         fields = ['product_name', 'slug', 'description', 'price', 'stock', 'images','is_available', 'category']    
+
+
+class dateInput(forms.DateInput):
+    input_type = 'date'               
+
+
+# class couponForm(forms.ModelForm):
+#     class Meta:
+#         model = Coupon
+#         fields = ['code', 'discount','expiry',]
+#         widgets = {
+#                     'expiry': dateInput(),
+#                     }
+#     def __init__(self, *args, **kwargs):
+#         super(couponForm,self).__init__(*args, **kwargs)
+#         self.fields['expiry'].widget.attrs['min'] = str(datetime.date.today())
+#         # self.fields['active'].widget.attrs['type'] = 'checkbox'
+#         for field  in self.fields:
+#             self.fields[field].widget.attrs['class'] = 'form-control'
+#         self.fields['active'].widget.attrs['class'] = 'form-check-input'         
+class CouponForm(forms.Form):
+    code = forms.CharField(max_length=20)

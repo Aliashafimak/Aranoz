@@ -1,9 +1,22 @@
 from django import forms
-
-
+import datetime
+from cart.models import Coupon
 
 class CouponForm(forms.Form):
-    code = forms.CharField(max_length=20)
+    code = forms.CharField(max_length=100)
+    discount = forms.IntegerField()
+    expiry = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    def save(self):
+        cleaned_data = self.cleaned_data
+        coupon = Coupon(
+            code=cleaned_data['code'],
+            discount=cleaned_data['discount'],
+            expiry=cleaned_data['expiry'],
+        )
+        coupon.save()
+        return coupon
+
 
 
 

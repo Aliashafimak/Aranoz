@@ -9,9 +9,10 @@
         <h3 class="page-title"> Welcome, {{request.user.first_name|capfirst}}!</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">
+            <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">
                 {{request.path}}
               </a></li>
+              {% comment %} i made edit here {% endcomment %}
             <li class="breadcrumb-item active" aria-current="page"></li>
           </ol>
         </nav>
@@ -28,8 +29,9 @@
             <a class="dropdown-item" href="{% url 'admin_dashboard_monthwise' month %}">{{month}}</a>
             {% endfor %}
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">All time</a>
+            <a class="dropdown-item" href="{% url 'admin_dashboard' %}">All time</a>
             </div>
+            {% comment %} i edited here {% endcomment %}
         </div>
 </div>
 <div class="row">
