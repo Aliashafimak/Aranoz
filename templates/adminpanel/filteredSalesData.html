@@ -6,7 +6,7 @@
   <div class="d-flex justify-content-center mb-3 mr-3">
     <input type="button" class="btn btn-inverse-danger btn-md mr-3 text-white" id="btnExport" value="Download PDF Report" />
   </div>
-  <table class="table" id="filtered_sales_data">
+  <table class="table " id="filtered_sales_data">
       <thead>
        {% if filter %}
        <h4 class="text-center"> Sales data from {{start_date|date}} To {{end_date|date}} </h4>
@@ -34,7 +34,7 @@
       {% for order in orders %}
       {% if  order.product__product_name %}
       <tbody>
-        <tr class="table">
+        <tr class="table text-white">
           <td>
             {{forloop.counter}}
           </td>

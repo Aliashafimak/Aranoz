@@ -34,7 +34,7 @@ gray-light: #aab2bd,
 gray-lighter: #e8eff4,
 gray-lightest: #e6e9ed,
 gray-dark: #12151e,
-black: #000000);
+black: #ffffff);
 
 
 $theme-colors: (primary: #0090e7,
@@ -44,14 +44,14 @@ info:  #8f5fe8,
 warning: #ffab00,
 danger: #fc424a,
 light: $white,
-dark: #0d0d0d);
+dark: #ffffff);
 
 
 
 ////////// COLOR SYSTEM //////////
 
 ////////// COLOR VARIABLES //////////
-$content-bg: #000000;
+$content-bg: #cecece;
 $footer-bg: $content-bg;
 $footer-color: color(dark);
 $border-color: #2c2e33;

@@ -140,7 +140,7 @@ if DEBUG==True:
     STATIC_ROOT =BASE_DIR/'static'
     STATICFILES_DIRS=[
         'ecommerce/static/',
-        # 'ecommerce/adminpanel/static'
+        'ecommerce/adminpanel/static'
         'ecommerce/static/adminpanel/'
     ]     
 else:
