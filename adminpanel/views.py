@@ -407,7 +407,7 @@ def adminOrders(request):
   context = {
     'orders':page_obj,
   }
-  return render(request, 'adminPanel/orderManagement/adminOrders.html', context)
+  return render(request, 'adminpanel/orderManagement/adminOrders.html', context)
 
 
 @staff_member_required(login_url = 'adminLogin')
