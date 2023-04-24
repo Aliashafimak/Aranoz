@@ -31,7 +31,7 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="#"><img src="{% static 'img/logo.png' %}" alt="logo" style="height: 3rem;width:6rem;" /></a>
+          <a class="sidebar-brand brand-logo" href="#"><img src="{% static 'img/logo.png' %}" alt="logo" style="height: 3rem;width:6rem;" />LOGO</a>
           <a class="sidebar-brand brand-logo-mini" href="#"><img src="{% static 'img/logo.png' %}" alt="logo" />click</a>
         </div>
         <ul class="nav">
@@ -171,7 +171,7 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
           <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="#"><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
+            <a class="navbar-brand brand-logo-mini " href="#"><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
           </div>
           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -179,11 +179,11 @@
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                {% comment %} <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
                   <input type="text" class="form-control" placeholder="Search products">
                   <div id="clock" class = "btn " style="    margin-left: 2rem;
                   margin-top: 0.5rem;"></div>
-                </form>
+                </form> {% endcomment %}
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">

@@ -44,20 +44,16 @@
                 <td>
                   <div class="product_count">
                     <a href= "{% url 'remove_cart' cart_item.product.id cart_item.id  %}"class="input-number-decrement"> <i class="ti-angle-down"></i></a>
-                    {% comment %} <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="input-number-decrement" data-product-id="{{cart_item.product.id}}" data-cart-item-id="{{cart_item.id}}"> <i class="ti-angle-down"></i></a> {% endcomment %}
                     <input class="input-number" type="text" value="{{cart_item.quantity}}" min="0" max="10">
-                    {% comment %} <input class="input-number cart-quantity" type="text" value="{{cart_item.quantity}}" min="0" max="10"> {% endcomment %}
-
                     <a href = "{% url 'add_cart' cart_item.product.id %}" class="input-number-increment" type="button" id="button-plus"> <i class="ti-angle-up"></i></a>
-                    {% comment %} <a href="{% url 'add_cart' cart_item.product.id %}" class="input-number-increment" data-product-id="{{cart_item.product.id}}"> <i class="ti-angle-up"></i></a> {% endcomment %}
-
+                    
                    
                   </div>
                   
                 </td>
                 <td>
                   <h5>₹{{cart_item.sub_total}}</h5>
-                  {% comment %} <h5 id="total-{{cart_item.id}}">₹{{cart_item.sub_total}}</h5> {% endcomment %}
+                  
                 </td>
                 <td class="text-right">
                   <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn btn-danger"> Remove</a>
@@ -96,33 +92,7 @@
       </div>
   </section>
   <!--================End Cart Area =================-->
-  {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $.ajax({
-      url: '{% url "update_cart" %}',
-      type: 'POST',
-      data: {
-        product_id: product_id,
-        cart_item_id: cart_item_id,
-        quantity: quantity,
-        price_id: 'price-' + cart_item_id,
-        total_id: 'total-' + cart_item_id,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function(data) {
-        // Update the quantity, price, and total on the page
-        inputElem.val(quantity);
-        $('#price-' + cart_item_id).html('₹' + data.price);
-        $('#total-' + cart_item_id).html('₹' + data.total);
-        $('#subtotal').html('₹' + data.subtotal);
-        $('#tax').html('₹' + data.tax);
-        $('#grand-total').html('₹' + data.grand_total);
-      }
-    });
-    
-    
-    
-    </script> {% endcomment %}
+ 
 </body>
 {% endblock %}
 </html>

@@ -1,5 +1,5 @@
 
-from datetime import datetime,timedelta
+from datetime import timedelta
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages, auth
 from django.contrib.auth import login, authenticate, logout
@@ -16,7 +16,11 @@ from django.db.models import Q
 from django.utils import timezone
 from django.db.models import Sum
 from cart.forms import CouponForm
+import datetime
 from datetime import date
+from datetime import datetime
+
+
 
 
 @never_cache
@@ -368,7 +372,10 @@ def adminSalesData(request):
         temp = start_date
         end_date = request.POST.get('end_date')
         # converting from naive to timezone aware
-        val = timezone.make_aware(datetime.strptime(end_date, '%Y-%m-%d'))
+        # val = timezone.make_aware(datetime.strptime(end_date, '%Y-%m-%d'))
+      
+        val = timezone.make_aware(datetime.datetime.strptime(end_date, '%Y-%m-%d'))
+
         start_date = timezone.make_aware(datetime.strptime(temp, '%Y-%m-%d'))
         end_date = val+timedelta(days=1)
         filter=True
@@ -423,8 +430,13 @@ def adminChangeOrder(request, id):
           if payment.payment_method == 'Cash On Delivery':
               payment.status = True
               payment.save()
-      except:
-          pass
+      except Payment.DoesNotExist:
+        # Handle the case where the payment doesn't exist
+        # or has already been marked as paid.
+        print(f"Payment with ID {order.order_number} does not exist or has already been marked as paid.")
+      except Exception as e:
+        # Handle any other exceptions that may occur.
+        print(f"An error occurred while processing payment for order {order.order_number}: {e}")
   return redirect('adminOrders')
 
 

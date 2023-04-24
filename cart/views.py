@@ -72,8 +72,11 @@ def add_cart(request, product_id):
     try:
         wishlist_item = WishlistItem.objects.get(user=current_user,product=product)
         wishlist_item.delete()
-    except:
-        pass
+    except WishlistItem.DoesNotExist:
+        print("Wishlist item does not exist.")
+    except Exception as e:
+        print(f"An error occurred while deleting the wishlist item: {e}")
+
     # If the user is authenticated
     if current_user.is_authenticated:
         product_variation = []
@@ -85,8 +88,12 @@ def add_cart(request, product_id):
                 try:
                     variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
                     product_variation.append(variation)
-                except:
-                    pass
+                except Variation.DoesNotExist:
+    
+                   print("Variation does not exist.")
+                except Exception as e:
+    
+                    print(f"An error occurred while retrieving the variation: {e}")
         is_cart_item_exists = CartItem.objects.filter(product=product, user=current_user).exists()
         print(is_cart_item_exists, 'is cart item exists bool==============================================================')
         if is_cart_item_exists:
@@ -204,8 +211,8 @@ def remove_cart(request, product_id, cart_item_id):
             cart_item.save()
         else:
             cart_item.delete()
-    except:
-        pass
+    except CartItem.DoesNotExist:
+        messages.error(request, 'This item is not in your cart.')
     return redirect('cart')
 
 
@@ -401,8 +408,9 @@ def remove_wishlist_item(request, product_id, wishlist_item_id):
             wishlist = Wishlist.objects.get(wishlist_id=_wishlist_id(request))
             wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist, id=wishlist_item_id)
         wishlist_item.delete()
-    except:
-        pass
+    except WishlistItem.DoesNotExist:
+
+     messages.error(request, 'This item is not in your wishlist.')
     
     return redirect('wishlist')
 

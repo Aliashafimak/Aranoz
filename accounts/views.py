@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.http import HttpResponseNotFound
 # Verification email
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -92,8 +93,9 @@ def login(request):
                         item.user = user
                         item.save()
 
-            except:
-                pass
+            except Cart.DoesNotExist:
+              return HttpResponseNotFound("The requested cart was not found")
+
 
 
             auth.login(request, user)
